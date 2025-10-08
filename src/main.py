@@ -3,18 +3,16 @@ from datetime import datetime
 import time
 import threading
 from programacion_lineal import main_programacion_lineal
-from aproximacion_vogel import main_vogel
-from metodo_costo_minimo import main_costo_minimo
-from modelo_de_asignacion import main_asignacion
-from esquina_noreste import main_esquina_noroeste  
-
-
+from metodo_simplex import main_simplex
+from metodo_simplex_minimizacion import main_simplex_minimizacion
 
 def main(page: ft.Page):
+    # Configurar el diseño principal
+     # Configuración del fondo con imagen
     fondo = ft.Image(
-        src="fondo6.jpg",
-        fit=ft.ImageFit.COVER,
-        expand=True
+    src="fondo6.jpg",
+    fit=ft.ImageFit.COVER,
+    expand=True
 )
     
 
@@ -93,21 +91,13 @@ def main(page: ft.Page):
         dynamic_content.content = main_programacion_lineal(page)
         page.update()
 
-    def abrir_main_vogel(e=None):
-        dynamic_content.content = main_vogel(page)
+    def abrir_metodo_simplex(e=None):
+        dynamic_content.content = main_simplex(page)
+        page.update()
+    def abrir_metodo_simplex_minimizacion(e=None):
+        dynamic_content.content = main_simplex_minimizacion(page)
         page.update()
 
-    def abrir_main_minimo(e=None):
-        dynamic_content.content = main_costo_minimo(page)
-        page.update()
-    
-    def abrir_main_asignacion(e=None):
-        dynamic_content.content = main_asignacion(page)
-        page.update()
-
-    def abrir_main_esquina_noroeste(e=None):
-        dynamic_content.content = main_esquina_noroeste(page)
-        page.update()
     
    
 
@@ -306,19 +296,11 @@ def main(page: ft.Page):
         elif selected_index == 1 :
             abrir_programacion_lineal()
         elif selected_index == 2 :
-            abrir_main_vogel()
+            abrir_metodo_simplex()
         elif selected_index == 3 :
-            abrir_main_minimo()
-        elif selected_index == 4 :
-            abrir_main_asignacion()
-        elif selected_index == 5 :
-            abrir_main_esquina_noroeste()
+            abrir_metodo_simplex_minimizacion()
             
         
-        
-
-
-
     # ----- 3. Área dinámica -----
     dynamic_content = ft.Container(content=inicio_content, expand=True)
 
@@ -329,11 +311,8 @@ def main(page: ft.Page):
         destinations=[
             ft.NavigationRailDestination(icon=ft.Icons.APPS, label="Inicio"),
             ft.NavigationRailDestination(icon=ft.Icons.CALCULATE, label="Programacion lineal"),
-            ft.NavigationRailDestination(icon=ft.Icons.MONEY, label="vogel "),
-            ft.NavigationRailDestination(icon=ft.Icons.SHOPPING_CART, label="Costo minimo"),
-            ft.NavigationRailDestination(icon=ft.Icons.EXIT_TO_APP, label="modelo de asignacion"),
-            ft.NavigationRailDestination(icon=ft.Icons.LOGOUT, label="Esquina Noroeste"),
-
+            ft.NavigationRailDestination(icon=ft.Icons.FUNCTIONS, label="Método Simplex"),
+            ft.NavigationRailDestination(icon=ft.Icons.FUNCTIONS, label="Método Simplex Minimizacion"),
         ],
         on_change=on_rail_change,
     )
